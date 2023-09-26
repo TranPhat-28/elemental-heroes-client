@@ -1,12 +1,16 @@
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Image from "/android-chrome-192x192.png";
 
 const LoginPage = () => {
 
     return (
         <div className="h-full w-full bg-base-300 flex items-center justify-center p-2">
             <div className="bg-base-100 flex flex-col items-center rounded-lg w-full max-w-xl p-4">
-                <h1 className="font-bold">Login to Battleship</h1>
+
+                <img src={Image} className="w-20 h-20" />
+
+                <h1 className="font-bold mt-2">Login to continue</h1>
 
                 <form className="form-control w-full max-w-xs flex flex-col">
                     <label className="label">Email: </label>
