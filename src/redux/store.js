@@ -3,7 +3,7 @@ import authSliceReducer from './features/auth/authSlice'
 
 const preloadedState = {
     userAuth: {
-      user: JSON.parse(localStorage.getItem('BattleshipUser')) || null
+      user: JSON.parse(localStorage.getItem('ElementalHeroesUser')) || null
     }
   }
 
