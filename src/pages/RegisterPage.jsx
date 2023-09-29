@@ -102,7 +102,7 @@ const RegisterPage = () => {
                         {isLoading && (
                             <span className="loading loading-spinner"></span>
                         )}
-                        Login
+                        Register
                     </button>
 
                     <div className="divider">Or register using</div>

@@ -1,20 +1,53 @@
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import Image from "/android-chrome-192x192.png";
+import { ObjectIsEmpty } from "../helpers/Object";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 const LoginPage = () => {
+    // React Hook Form
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    // Handle on submit
+    const onSubmit = (data) => {
+        setIsLoading(true);
+
+        axios
+            .post("/api/Auth/Login", data)
+            .then(function (response) {
+                toast.success(response.data.message);
+                setIsLoading(false);
+            })
+            .catch(function (error) {
+                toast.error(error.response.data.message);
+                setIsLoading(false);
+            });
+    };
+
+    // Loading
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <div className="h-full w-full bg-base-300 flex items-center justify-center p-2">
             <div className="bg-base-100 flex flex-col items-center rounded-lg w-full max-w-xl p-4">
-
                 <img src={Image} className="w-20 h-20" />
 
                 <h1 className="font-bold mt-2">Login to continue</h1>
 
-                <form className="form-control w-full max-w-xs flex flex-col">
+                <form
+                    className="form-control w-full max-w-xs flex flex-col"
+                    onSubmit={handleSubmit(onSubmit)}
+                >
                     <label className="label">Email: </label>
                     <input
+                        {...register("email")}
                         type="text"
                         placeholder="example@email.com"
                         className="input input-bordered w-full max-w-xs"
@@ -22,10 +55,17 @@ const LoginPage = () => {
 
                     <label className="label">Password: </label>
                     <input
+                        {...register("password")}
                         type="password"
                         placeholder="***"
                         className="input input-bordered w-full max-w-xs"
                     />
+
+                    {!ObjectIsEmpty(errors) && (
+                        <span className="mt-1 text-red-600">
+                            {Object.values(errors)[0].message}
+                        </span>
+                    )}
 
                     <Link
                         className="mt-2 cursor-pointer hover:font-bold w-fit"
@@ -34,7 +74,14 @@ const LoginPage = () => {
                         Forgot password?
                     </Link>
 
-                    <button className="btn btn-primary w-full my-4">
+                    <button
+                        className={`btn ${
+                            isLoading ? "btn-disabled" : "btn-primary"
+                        } w-full mt-4`}
+                    >
+                        {isLoading && (
+                            <span className="loading loading-spinner"></span>
+                        )}
                         Login
                     </button>
 
