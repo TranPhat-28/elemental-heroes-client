@@ -41,11 +41,6 @@ const Settings = () => {
                                     <th>Victories:</th>
                                     <td>0000</td>
                                 </tr>
-
-                                <tr className="hover">
-                                    <th>Ships owned:</th>
-                                    <td>0000</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

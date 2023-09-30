@@ -1,11 +1,14 @@
 import Tile from "./Tile";
 
-const LibraryList = ({ data }) => {
+const LibraryList = ({ title, data }) => {
     return (
-        <div>
-            {data.map((item) => (
-                <Tile key={item}/>
-            ))}
+        <div className="w-full max-w-[380px] sm:max-w-[440px] md:max-w-[360px] lg:max-w-[500px]">
+            <h1 className="font-bold my-2">{title}</h1>
+            <div className="grid grid-cols-3 min-[450px]:grid-cols-4 md:grid-cols-3 lg:grid-cols-4">
+                {data.map((item) => (
+                    <Tile key={item} />
+                ))}
+            </div>
         </div>
     );
 };
