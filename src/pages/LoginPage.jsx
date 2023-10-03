@@ -6,6 +6,8 @@ import { ObjectIsEmpty } from "../helpers/Object";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUserAuth } from "../redux/features/auth/authSlice";
 
 const LoginPage = () => {
     // React Hook Form
@@ -14,6 +16,8 @@ const LoginPage = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
+
+    const dispatch = useDispatch();
 
     // Handle on submit
     const onSubmit = (data) => {
@@ -24,6 +28,15 @@ const LoginPage = () => {
             .then(function (response) {
                 toast.success(response.data.message);
                 setIsLoading(false);
+
+                // The user
+                const user = {
+                    email: data.email,
+                    token: response.data.data,
+                };
+
+                dispatch(addUserAuth(user));
+                localStorage.setItem("ElementalHeroesUser", JSON.stringify(user));
             })
             .catch(function (error) {
                 toast.error(error.response.data.message);

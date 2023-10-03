@@ -9,7 +9,7 @@ const Settings = () => {
     // Logout function
     const logout = () => {
         dispatch(removeUserAuth());
-        localStorage.removeItem("BattleshipUser");
+        localStorage.removeItem("ElementalHeroesUser");
     }
 
     return (
@@ -22,7 +22,7 @@ const Settings = () => {
                 </div>
 
                 <div className="text-center lg:-translate-y-36">
-                    <h1 className="font-bold">{user}</h1>
+                    <h1 className="font-bold">{user.email}</h1>
 
                     <div className="overflow-x-auto my-4">
                         <table className="table table-sm lg:table-md">
