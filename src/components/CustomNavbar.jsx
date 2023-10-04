@@ -11,33 +11,33 @@ const CustomNavbar = () => {
     return (
         <div className="bg-base-200 flex justify-center">
             <div className="flex lg:flex-col w-full max-w-lg justify-center [&_.active]:bg-base-300 lg:p-2 lg:justify-start lg:gap-1">
-                <NavLink to={"/"} className="lg:rounded-xl">
-                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl">
-                        <PiHouseBold size={"2em"} />
+                <NavLink to={"/"} className="lg:rounded-xl lg:w-24 lg:h-24">
+                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl lg:w-24 lg:h-24">
+                        <PiHouseBold className="text-4xl lg:text-6xl" />
                     </button>
                 </NavLink>
 
                 <NavLink to={"/formation"} className="lg:rounded-xl">
-                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl">
-                        <PiCirclesThreeBold size={"2em"} />
+                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl lg:w-24 lg:h-24">
+                        <PiCirclesThreeBold className="text-4xl lg:text-6xl" />
                     </button>
                 </NavLink>
 
                 <NavLink to={"/library"} className="lg:rounded-xl">
-                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl">
-                        <PiBookBookmarkBold size={"2em"} />
+                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl lg:w-24 lg:h-24">
+                        <PiBookBookmarkBold className="text-4xl lg:text-6xl" />
                     </button>
                 </NavLink>
 
                 <NavLink to={"/shop"} className="lg:rounded-xl">
-                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl">
-                        <PiShoppingBagBold size={"2em"} />
+                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl lg:w-24 lg:h-24">
+                        <PiShoppingBagBold className="text-4xl lg:text-6xl" />
                     </button>
                 </NavLink>
 
                 <NavLink to={"/settings"} className="lg:rounded-xl">
-                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl">
-                        <PiGearSixBold size={"2em"} />
+                    <button className="btn btn-square btn-lg bg-transparent lg:rounded-xl lg:w-24 lg:h-24">
+                        <PiGearSixBold className="text-4xl lg:text-6xl" />
                     </button>
                 </NavLink>
             </div>
