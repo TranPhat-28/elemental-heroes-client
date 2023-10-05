@@ -2,7 +2,7 @@ import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Image from "/android-chrome-192x192.png";
-import { ObjectIsEmpty } from "../helpers/Object";
+import { ObjectIsEmpty } from "../helpers/Helpers";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";

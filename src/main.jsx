@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
+import TutorialModal from "./components/TutorialModal.jsx";
 
 axios.defaults.baseURL = "https://elemental-heroes-server.onrender.com";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -19,7 +20,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Provider store={store}>
             <BrowserRouter>
                 <App />
-                <ToastContainer theme="colored" />
+                <TutorialModal />
+                <ToastContainer theme="colored" autoClose={1000} />
             </BrowserRouter>
         </Provider>
     </React.StrictMode>

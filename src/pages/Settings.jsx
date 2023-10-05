@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeUserAuth } from "../redux/features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const Settings = () => {
     // Read the user
@@ -10,6 +11,7 @@ const Settings = () => {
     const logout = () => {
         dispatch(removeUserAuth());
         localStorage.removeItem("ElementalHeroesUser");
+        toast.success("Logout success");
     }
 
     return (

@@ -28,6 +28,7 @@ function App() {
             >
                 <Route index element={<Home />} />
                 <Route path="/formation" element={<Formation />} />
+                <Route path="/create" element={<div>Create your hero</div>} />
                 <Route path="/library" element={<Library />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/settings" element={<Settings />} />
