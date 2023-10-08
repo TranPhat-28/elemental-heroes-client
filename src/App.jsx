@@ -13,10 +13,19 @@ import Library from "./pages/Library";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ResetPasswordPage from "./pages/ResetPassword";
+import Create from "./pages/CreateHeroPage/Create";
+import NotFound from "./pages/NotFound";
 
 function App() {
     // Read user from LocalStorage
     const user = useSelector((state) => state.userAuth.user);
+    // Read routing from Redux
+    const allowCreatePage = useSelector(
+        (state) => state.userRouting.allowCreatePage
+    );
+    const allowFeaturePages = useSelector(
+        (state) => state.userRouting.allowFeaturePages
+    );
 
     return (
         <Routes>
@@ -27,12 +36,26 @@ function App() {
                 }
             >
                 <Route index element={<Home />} />
-                <Route path="/formation" element={<Formation />} />
-                <Route path="/create" element={<div>Create your hero</div>} />
-                <Route path="/library" element={<Library />} />
-                <Route path="/shop" element={<Shop />} />
+                {allowFeaturePages && (
+                    <>
+                        <Route path="/formation" element={<Formation />} />
+                        <Route path="/library" element={<Library />} />
+                        <Route path="/shop" element={<Shop />} />
+                    </>
+                )}
                 <Route path="/settings" element={<Settings />} />
             </Route>
+
+            <Route
+                path="/create"
+                element={
+                    user && allowCreatePage ? (
+                        <Create />
+                    ) : (
+                        <Navigate to={"/login"} replace />
+                    )
+                }
+            />
 
             <Route
                 path="/login"
@@ -51,7 +74,7 @@ function App() {
                 }
             />
 
-            <Route path="*" element={<>Not found</>} />
+            <Route path="*" element={<NotFound />} />
         </Routes>
     );
 }

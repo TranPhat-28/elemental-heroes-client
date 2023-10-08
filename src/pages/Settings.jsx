@@ -1,18 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { removeUserAuth } from "../redux/features/auth/authSlice";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import useLogout from "../hooks/Users";
 
 const Settings = () => {
     // Read the user
     const user = useSelector((state) => state.userAuth.user);
-    const dispatch = useDispatch();
 
     // Logout function
-    const logout = () => {
-        dispatch(removeUserAuth());
-        localStorage.removeItem("ElementalHeroesUser");
-        toast.success("Logout success");
-    }
+    const { logout } = useLogout();
 
     return (
         <div className="h-full w-full flex flex-col items-center">
@@ -47,7 +41,7 @@ const Settings = () => {
                         </table>
                     </div>
 
-                    <button className="btn btn-outline btn-primary" onClick={logout}>
+                    <button className="btn btn-outline btn-primary" onClick={() => logout()}>
                         Logout
                     </button>
                 </div>

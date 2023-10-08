@@ -32,3 +32,13 @@ export const GetHeroType = (AttackType, DamageType) => {
 
     return type;
 }
+
+// Return public element image path
+export const GetElementImgPath = (element) => {
+    return `assets/elements/${element?.toLowerCase()}.png`;
+}
+
+// Return public hero type image path
+export const GetHeroImgPath = (hero) => {
+    return `assets/heroes/${hero}.png`;
+}

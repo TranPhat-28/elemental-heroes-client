@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUserAuth } from "../redux/features/auth/authSlice";
+import { allowFeaturePagesAccess } from "../redux/features/routing/routingSlice";
 
 const LoginPage = () => {
     // React Hook Form
@@ -36,6 +37,7 @@ const LoginPage = () => {
                 };
 
                 dispatch(addUserAuth(user));
+                dispatch(allowFeaturePagesAccess());
                 localStorage.setItem("ElementalHeroesUser", JSON.stringify(user));
             })
             .catch(function (error) {

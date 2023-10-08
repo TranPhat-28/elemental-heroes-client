@@ -10,32 +10,23 @@ import {
     PiArrowsOutLineVerticalBold,
 } from "react-icons/pi";
 import { FaShieldHalved, FaHammer, FaReact } from "react-icons/fa6";
-
-// Elements
-import Fire from "../assets/elements/fire.png";
-import Water from "../assets/elements/water.png";
-import Lightning from "../assets/elements/lightning.png";
-import Wind from "../assets/elements/wind.png";
-import Earth from "../assets/elements/earth.png";
-
-// HeroTypes
-import Knight from "../assets/heroes/Knight.png";
-import Assassin from "../assets/heroes/Assassin.png";
-import Monk from "../assets/heroes/Monk.png";
-import Wizard from "../assets/heroes/Wizard.png";
+import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { removeUserAuth } from "../redux/features/auth/authSlice";
-import { GetHeroType } from "../helpers/Helpers";
+import {
+    GetElementImgPath,
+    GetHeroImgPath,
+    GetHeroType,
+} from "../helpers/Helpers";
+import EditNameModal from "../components/EditNameModal";
 
 const Formation = () => {
     // Data storing object
     const [heroInfo, setHeroInfo] = useState({});
-    const [heroElement, setHeroElement] = useState(null);
-    const [heroAssetImg, setHeroAssetImg] = useState(null);
 
     // Redux
     const dispatch = useDispatch();
@@ -49,41 +40,6 @@ const Formation = () => {
             })
             .then(function (response) {
                 setHeroInfo(response.data.data);
-                switch (heroInfo.element) {
-                    case "Fire":
-                        setHeroElement(Fire);
-                        break;
-                    case "Water":
-                        setHeroElement(Water);
-                        break;
-                    case "Lightning":
-                        setHeroElement(Lightning);
-                        break;
-                    case "Wind":
-                        setHeroElement(Wind);
-                        break;
-                    case "Earth":
-                        setHeroElement(Earth);
-                        break;
-                }
-                const heroType = GetHeroType(
-                    heroInfo.attackType,
-                    heroInfo.damageType
-                );
-                switch (heroType) {
-                    case "Knight":
-                        setHeroAssetImg(Knight);
-                        break;
-                    case "Assassin":
-                        setHeroAssetImg(Assassin);
-                        break;
-                    case "Monk":
-                        setHeroAssetImg(Monk);
-                        break;
-                    case "Wizard":
-                        setHeroAssetImg(Wizard);
-                        break;
-                }
             })
             .catch(function (error) {
                 if (error.response.status == 401) {
@@ -101,31 +57,57 @@ const Formation = () => {
     return (
         <div className="w-full h-full flex justify-center">
             <div className="w-full max-w-lg h-full md:max-w-4xl flex flex-col md:flex-row p-2">
-                <div className="border border-red-500 h-2/3 md:h-full w-full md:w-2/3 flex flex-col justify-center items-center">
-                    <p className="font-bold text-4xl">{heroInfo.name}</p>
+                <div className="h-2/3 md:h-full w-full md:w-2/3 flex flex-col justify-center items-center">
+                    <div className="w-full flex justify-center">
+                        <p className="border w-fit text-center text-4xl font-bold px-5">
+                            {heroInfo.name}
+                        </p>
+                        <button className="btn btn-outline btn-primary">
+                            <AiOutlineEdit
+                                size={"lg"}
+                                onClick={() =>
+                                    document
+                                        .getElementById("change_name_modal")
+                                        .showModal()
+                                }
+                            />
+                        </button>
+                    </div>
+
                     <img
-                        src={heroAssetImg}
+                        src={GetHeroImgPath(
+                            GetHeroType(
+                                heroInfo.attackType,
+                                heroInfo.damageType
+                            )
+                        )}
                         className="h-52 w-52 md:w-72 md:h-72 lg:w-80 lg:h-80 self-center"
                     />
                     {/* Weapon and skills container */}
-                    <div className="flex border border-blue-500 gap-5 sm:gap-8 justify-center">
+                    <div className="flex gap-5 sm:gap-8 justify-center">
                         <Tile size={"large"} />
                         <Tile />
                         <Tile />
                         <Tile />
                     </div>
                 </div>
-                <div className="border border-red-500 h-1/3 md:h-full w-full md:w-1/3 p-2">
+                <div className="h-1/3 md:h-full w-full md:w-1/3 p-2">
                     <div className="h-full w-full grid gap-2 grid-cols-2 md:grid-cols-1">
                         <Stat
                             icon={<GiMedicalPack className="text-4xl" />}
                             value={`${heroInfo.hp} + 0`}
                         />
                         <Stat
-                            icon={<img className="h-9 w-9" src={heroElement} />}
+                            icon={
+                                <img
+                                    className="h-9 w-9"
+                                    src={GetElementImgPath(heroInfo.element)}
+                                />
+                            }
                             value={heroInfo.element}
                         />
                         <Stat
+                            position={"md:row-start-2"}
                             icon={<PiSwordBold className="text-4xl" />}
                             value={`${heroInfo.attack} + 0`}
                         />
@@ -140,6 +122,7 @@ const Formation = () => {
                             value={heroInfo.attackType}
                         />
                         <Stat
+                            position={"md:row-start-3"}
                             icon={<FaShieldHalved className="text-4xl" />}
                             value={`${heroInfo.defense} + 0`}
                         />
@@ -156,6 +139,7 @@ const Formation = () => {
                     </div>
                 </div>
             </div>
+            <EditNameModal heroInfo={heroInfo} setHeroInfo={setHeroInfo} />
         </div>
     );
 };
