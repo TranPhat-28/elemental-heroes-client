@@ -6,7 +6,7 @@ const LibraryList = ({ title, data }) => {
             <h1 className="font-bold my-2">{title}</h1>
             <div className="grid grid-cols-3 min-[450px]:grid-cols-4 md:grid-cols-3 xl:grid-cols-4">
                 {data.map((item) => (
-                    <Tile key={item} />
+                    <Tile key={item.id} data={item} />
                 ))}
             </div>
         </div>

@@ -7,7 +7,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+        colors: {
+            fire: "#ff3b0f",
+            water: "#0003a6",
+            electric: "#6600a1",
+            wind: "#0f9411",
+            earth: "#703a00"
+        }
+    },
   },
   plugins: [daisyui],
   daisyui: {

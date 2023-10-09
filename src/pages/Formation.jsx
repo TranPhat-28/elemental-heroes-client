@@ -25,6 +25,13 @@ import {
 import EditNameModal from "../components/EditNameModal";
 
 const Formation = () => {
+
+    // Mock data
+    const mockData = [{ id: 1, name: "A", iconUrl: "https://picsum.photos/200", element: "Fire" },
+        { id: 2, name: "B", iconUrl: "https://picsum.photos/200", element: "Water" },
+        { id: 3, name: "C", iconUrl: "https://picsum.photos/200", element: "Wind" },
+        { id: 4, name: "D", iconUrl: "https://picsum.photos/200", element: "Electric" }]
+
     // Data storing object
     const [heroInfo, setHeroInfo] = useState({});
 
@@ -64,7 +71,7 @@ const Formation = () => {
                         </p>
                         <button className="btn btn-outline btn-primary">
                             <AiOutlineEdit
-                                size={"lg"}
+                                size={"2rem"}
                                 onClick={() =>
                                     document
                                         .getElementById("change_name_modal")
@@ -85,10 +92,10 @@ const Formation = () => {
                     />
                     {/* Weapon and skills container */}
                     <div className="flex gap-5 sm:gap-8 justify-center">
-                        <Tile size={"large"} />
-                        <Tile />
-                        <Tile />
-                        <Tile />
+                        <Tile size={"large"} data={mockData[0]}/>
+                        <Tile data={mockData[1]}/>
+                        <Tile data={mockData[2]}/>
+                        <Tile data={mockData[3]}/>
                     </div>
                 </div>
                 <div className="h-1/3 md:h-full lg:flex lg:items-center w-full md:w-1/3 p-2">
