@@ -3,7 +3,7 @@ import {
     GetHeroImgPath,
     GetHeroType,
     ObjectIsEmpty,
-} from "../../helpers/Helpers";
+} from "../helpers/Helpers";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";

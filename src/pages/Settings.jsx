@@ -17,7 +17,7 @@ const Settings = () => {
                     </div>
                 </div>
 
-                <div className="text-center lg:-translate-y-36">
+                <div className="text-center lg:-translate-y-20">
                     <h1 className="font-bold">{user.email}</h1>
 
                     <div className="overflow-x-auto my-4">
@@ -29,12 +29,32 @@ const Settings = () => {
                                 </tr>
                             
                                 <tr className="hover">
-                                    <th>Game played:</th>
+                                    <th>Singleplayer game played:</th>
                                     <td>0000</td>
                                 </tr>
 
                                 <tr className="hover">
-                                    <th>Victories:</th>
+                                    <th>Singleplayer victories:</th>
+                                    <td>0000</td>
+                                </tr>
+
+                                <tr className="hover">
+                                    <th>Multiplayer challenge played:</th>
+                                    <td>0000</td>
+                                </tr>
+
+                                <tr className="hover">
+                                    <th>Multiplayer victories:</th>
+                                    <td>0000</td>
+                                </tr>
+
+                                <tr className="hover">
+                                    <th>Weapons owned:</th>
+                                    <td>0000</td>
+                                </tr>
+
+                                <tr className="hover">
+                                    <th>Skills owned:</th>
                                     <td>0000</td>
                                 </tr>
                             </tbody>

@@ -13,7 +13,7 @@ import Library from "./pages/Library";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ResetPasswordPage from "./pages/ResetPassword";
-import Create from "./pages/CreateHeroPage/Create";
+import Create from "./pages/Create";
 import NotFound from "./pages/NotFound";
 
 function App() {

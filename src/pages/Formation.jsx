@@ -91,8 +91,8 @@ const Formation = () => {
                         <Tile />
                     </div>
                 </div>
-                <div className="h-1/3 md:h-full w-full md:w-1/3 p-2">
-                    <div className="h-full w-full grid gap-2 grid-cols-2 md:grid-cols-1">
+                <div className="h-1/3 md:h-full lg:flex lg:items-center w-full md:w-1/3 p-2">
+                    <div className="h-full lg:h-3/4 w-full grid gap-2 grid-cols-2 md:grid-cols-1">
                         <Stat
                             icon={<GiMedicalPack className="text-4xl" />}
                             value={`${heroInfo.hp} + 0`}
