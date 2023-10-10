@@ -1,5 +1,4 @@
-const Tile = ({ size, data }) => {
-    //const ringColor = `ring-${data.element.toLowerCase()}`;
+const Tile = ({ data, setModalData }) => {
     const ringColor =
         data.element == "Fire"
             ? "ring-fire"
@@ -12,13 +11,15 @@ const Tile = ({ size, data }) => {
             : "ring-electric";
 
     return (
-        <div className="avatar py-3 justify-self-center">
+        <div
+            className="avatar py-3 justify-self-center hover:opacity-70 cursor-pointer duration-100"
+            onClick={() => {
+                document.getElementById("info_modal").showModal();
+                setModalData(data);
+            }}
+        >
             <div
-                className={`${
-                    size == "large"
-                        ? "w-20 h-20 sm:w-24 sm:h-24"
-                        : "w-16 h-16 sm:w-20 sm:h-20"
-                } rounded-lg ring ${ringColor} ring-offset-base-100 ring-offset-2`}
+                className={`rounded-lg w-16 h-16 sm:w-20 sm:h-20 ring ${ringColor} ring ring-offset-base-100 ring-offset-2`}
             >
                 <img src={data.iconUrl} />
             </div>

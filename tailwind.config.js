@@ -10,10 +10,10 @@ export default {
     extend: {
         colors: {
             fire: "#ff3b0f",
-            water: "#0003a6",
-            electric: "#6600a1",
-            wind: "#0f9411",
-            earth: "#703a00"
+            water: "#0004f0",
+            electric: "#9b00f5",
+            wind: "#0cc20e",
+            earth: "#cf6b00"
         }
     },
   },

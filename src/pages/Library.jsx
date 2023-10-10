@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import LibraryList from "../components/LibraryList";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import LibraryList from "../components/LibraryList";
 import useLogout from "../hooks/Users";
 
 const Library = () => {
@@ -15,11 +16,36 @@ const Library = () => {
 
     // Mock weapon data
     const mockWeaponList = [
-        { id: 1, name: "A", iconUrl: "https://picsum.photos/200", element: "Fire" },
-        { id: 2, name: "B", iconUrl: "https://picsum.photos/200", element: "Water" },
-        { id: 3, name: "C", iconUrl: "https://picsum.photos/200", element: "Wind" },
-        { id: 4, name: "D", iconUrl: "https://picsum.photos/200", element: "Electric" },
-        { id: 5, name: "E", iconUrl: "https://picsum.photos/200", element: "Earth" },
+        {
+            id: 1,
+            name: "A",
+            iconUrl: "https://picsum.photos/200",
+            element: "Fire",
+        },
+        {
+            id: 2,
+            name: "B",
+            iconUrl: "https://picsum.photos/200",
+            element: "Water",
+        },
+        {
+            id: 3,
+            name: "C",
+            iconUrl: "https://picsum.photos/200",
+            element: "Wind",
+        },
+        {
+            id: 4,
+            name: "D",
+            iconUrl: "https://picsum.photos/200",
+            element: "Electric",
+        },
+        {
+            id: 5,
+            name: "E",
+            iconUrl: "https://picsum.photos/200",
+            element: "Earth",
+        },
     ];
 
     // Loading
@@ -60,14 +86,17 @@ const Library = () => {
     return (
         <div className="w-full h-full p-4 overflow-y-scroll">
             <div className="w-full h-full flex flex-col md:flex-row md:justify-around items-center md:items-start">
-                {skillLoading && <p>Loading...</p>}
-                {weaponLoading && <p>Loading...</p>}
-                {skillList && (
-                    <LibraryList title={"Weapons"} data={weaponList} />
-                )}
-                {weaponList && (
-                    <LibraryList title={"Skills"} data={skillList} />
-                )}
+                <div className="w-full max-w-[380px] sm:max-w-[440px] md:max-w-[360px] lg:max-w-[400px] xl:max-w-[500px]">
+                    <h1 className="font-bold my-2">Weapons</h1>
+                    {/* { weaponLoading && <BeatLoader /> }
+                    { weaponList && <LibraryList data={weaponList} /> } */}
+                </div>
+
+                <div className="w-full max-w-[380px] sm:max-w-[440px] md:max-w-[360px] lg:max-w-[400px] xl:max-w-[500px]">
+                    <h1 className="font-bold my-2">Skills</h1>
+                    { skillLoading && <BeatLoader /> }
+                    { skillList && <LibraryList data={skillList} type={"skill"} /> }
+                </div>
             </div>
         </div>
     );
