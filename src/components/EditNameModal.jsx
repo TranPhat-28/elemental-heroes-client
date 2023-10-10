@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { setHeroData } from "../redux/features/hero/heroSlice";
 
-const EditNameModal = ({ heroInfo, setHeroInfo }) => {
+const EditNameModal = () => {
     // Data
     const [name, setName] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     // Redux
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.userAuth.user);
 
     // Handle submit
@@ -33,12 +35,13 @@ const EditNameModal = ({ heroInfo, setHeroInfo }) => {
                     toast.success("Hero name changed successfully");
                     document.getElementById("change_name_modal").close();
 
-                    // console.log(response);
-                    const tmp = heroInfo;
-                    tmp.name = name;
-                    setHeroInfo(tmp);
-
-                    // console.log(heroInfo);
+                    // Set the heroData
+                    dispatch(
+                        setHeroData({
+                            status: true,
+                            data: response.data.data,
+                        })
+                    );
                 })
                 .catch(function (error) {
                     toast.error("Something went wrong");
@@ -52,7 +55,9 @@ const EditNameModal = ({ heroInfo, setHeroInfo }) => {
     return (
         <dialog id="change_name_modal" className="modal">
             <div className="modal-box flex flex-col">
-                <h3 className="font-bold text-lg">CHANGE YOU HERO NAME</h3>
+                <h3 className="font-bold text-lg text-center">
+                    CHANGE YOU HERO NAME
+                </h3>
                 <input
                     type="text"
                     placeholder="New name"

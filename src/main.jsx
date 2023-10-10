@@ -10,20 +10,20 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
-import TutorialModal from "./components/TutorialModal.jsx";
 import { MoonLoader } from "react-spinners";
+import LoadingModal from "./components/LoadingModal.jsx";
 
 axios.defaults.baseURL = "https://elemental-heroes-server.onrender.com";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <React.Suspense fallback={<MoonLoader color="#DB2777" />}>
+        <React.Suspense fallback={<MoonLoader />}>
             <Provider store={store}>
                 <BrowserRouter>
                     <App />
-                    <TutorialModal />
                     <ToastContainer theme="colored" autoClose={1000} />
+                    <LoadingModal />
                 </BrowserRouter>
             </Provider>
         </React.Suspense>

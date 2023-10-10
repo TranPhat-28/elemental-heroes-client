@@ -7,8 +7,8 @@ const NotFound = () => {
 
     return(
         <div className="w-full h-full bg-base-300 flex flex-col items-center justify-center">
-            <PiSealQuestion size={"2xl"} />
-            <p className="text-4xl font-bold p-4">Page not found</p>
+            <PiSealQuestion size={"10em"} />
+            <p className="text-4xl font-bold p-8">Page not found</p>
             <button className="btn btn-primary btn-outline" onClick={() => navigate('/')}>Go home</button>
         </div>
     );

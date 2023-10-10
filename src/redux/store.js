@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authSliceReducer from './features/auth/authSlice'
 import routingSliceReducer from './features/routing/routingSlice'
+import heroSliceReducer from './features/hero/heroSlice'
 
 const preloadedState = {
     userAuth: {
@@ -11,7 +12,8 @@ const preloadedState = {
 export const store = configureStore({
     reducer: {
         userAuth: authSliceReducer,
-        userRouting: routingSliceReducer
+        userRouting: routingSliceReducer,
+        heroData: heroSliceReducer
     },
     preloadedState: preloadedState
 })

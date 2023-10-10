@@ -9,6 +9,8 @@ import {
     denyCreatePageAccess,
     denyFeaturePagesAccess,
 } from "../redux/features/routing/routingSlice";
+import TutorialModal from "../components/TutorialModal";
+import { setHeroData } from "../redux/features/hero/heroSlice";
 
 const Home = () => {
     // The Logout hook
@@ -17,40 +19,75 @@ const Home = () => {
     // Redux
     const dispatch = useDispatch();
     const user = useSelector((state) => state.userAuth.user);
+    const hero = useSelector((state) => state.heroData.hero);
 
     // Fetch user data
     useEffect(() => {
-        axios
-            .get("/api/Hero", {
-                headers: { Authorization: `Bearer ${user.token}` },
-            })
-            .then(function (response) {
-                // If user does not have a hero yet
-                if (response.data.data == null) {
-                    document.getElementById("tutorial_modal").showModal();
+        // Only fetch if the heroData is null
+        if (hero === null) {
+            // Show the loading modal
+            document.getElementById("loading_modal").showModal();
 
-                    // Allow access to CreatePage only and not FeaturePages
-                    dispatch(allowCreatePageAccess());
-                    dispatch(denyFeaturePagesAccess());
-                }
-                // If user already has a hero
-                else {
-                    // Allow FeaturePages but not CreatePage
-                    dispatch(allowFeaturePagesAccess());
-                    dispatch(denyCreatePageAccess());
-                }
-            })
-            .catch(function (error) {
-                if (error.response.status == 401) {
-                    toast.error("Cannot authenticate, please login again");
-                    logout();
+            axios
+                .get("/api/Hero", {
+                    headers: { Authorization: `Bearer ${user.token}` },
+                })
+                .then(function (response) {
+                    // If user does not have a hero yet
+                    if (response.data.data == null) {
+                        // Set the heroData
+                        dispatch(
+                            setHeroData({
+                                status: true,
+                                data: null,
+                            })
+                        );
 
-                    console.log(error.response);
-                } else {
-                    toast.error("Something went wrong");
-                    console.log(error);
-                }
-            });
+                        // Allow access to CreatePage only and not FeaturePages
+                        dispatch(allowCreatePageAccess());
+                        dispatch(denyFeaturePagesAccess());
+
+                        // Show the Create Hero modal if no hero data found
+                        document.getElementById("tutorial_modal").showModal();
+                    }
+                    // If user already has a hero
+                    else {
+                        // Set the heroData
+                        dispatch(
+                            setHeroData({
+                                status: true,
+                                data: response.data.data,
+                            })
+                        );
+
+                        // Allow FeaturePages but not CreatePage
+                        dispatch(allowFeaturePagesAccess());
+                        dispatch(denyCreatePageAccess());
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response.status == 401) {
+                        toast.error("Cannot authenticate, please login again");
+                        logout();
+
+                        console.log(error.response);
+                    } else {
+                        toast.error("Something went wrong");
+                        console.log(error);
+                    }
+                })
+                .finally(() => {
+                    // Close the loading modal
+                    document.getElementById("loading_modal").close();
+                });
+        }
+        // If already fetch, just check in the HeroData
+        else {
+            // Show the Create Hero modal if no hero data found
+            if (hero.data === null) {
+                document.getElementById("tutorial_modal").showModal();
+            }
+        }
     }, []);
 
     return (
@@ -74,6 +111,7 @@ const Home = () => {
                     Battle a friend
                 </p>
             </div>
+            <TutorialModal />
         </div>
     );
 };

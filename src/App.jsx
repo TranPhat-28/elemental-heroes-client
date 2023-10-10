@@ -29,6 +29,7 @@ function App() {
 
     return (
         <Routes>
+            {/* This Route required user to login */}
             <Route
                 path="/"
                 element={
@@ -36,6 +37,7 @@ function App() {
                 }
             >
                 <Route index element={<Home />} />
+                {/* These Routes requires user to have a Hero created */}
                 {allowFeaturePages && (
                     <>
                         <Route path="/formation" element={<Formation />} />
