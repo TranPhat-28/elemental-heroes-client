@@ -94,7 +94,7 @@ const Home = () => {
         <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-5 sm:gap-10">
             <div className="flex flex-col items-center cursor-pointer rounded-3xl p-4 md:p-6 bg-base-200 hover:shadow-2xl duration-75">
                 <img
-                    src={"assets/gamesStartIcon/BattleA.png"}
+                    src={"assets/icons/BattleA.png"}
                     className="w-52 h-52 lg:w-80 lg:h-80"
                 />
                 <p className="font-bold text-3xl md:text-4xl">
@@ -104,7 +104,7 @@ const Home = () => {
 
             <div className="flex flex-col items-center cursor-pointer rounded-3xl p-4 md:p-6 bg-base-200 hover:shadow-2xl duration-75">
                 <img
-                    src={"assets/gamesStartIcon/BattleB.png"}
+                    src={"assets/icons/BattleB.png"}
                     className="w-52 h-52 lg:w-80 lg:h-80"
                 />
                 <p className="font-bold text-3xl md:text-4xl">
