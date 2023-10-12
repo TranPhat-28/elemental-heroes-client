@@ -14,8 +14,8 @@ const Tile = ({ data, setModalData }) => {
         <div
             className="avatar py-3 justify-self-center hover:opacity-70 cursor-pointer duration-100"
             onClick={() => {
-                document.getElementById("info_modal").showModal();
                 setModalData(data);
+                document.getElementById("info_modal").showModal();
             }}
         >
             <div

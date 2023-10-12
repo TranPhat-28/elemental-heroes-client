@@ -1,17 +1,12 @@
-import { useState } from "react";
-import InfoModal from "./InfoModal";
 import Tile from "./Tile";
 
-const LibraryList = ({ data, type }) => {
-    const [modalData, setModalData] = useState(null);
+const LibraryList = ({ data, setModalData }) => {
 
     return (
         <div className="grid grid-cols-3 min-[450px]:grid-cols-4 md:grid-cols-3 xl:grid-cols-4">
             {data.map((item) => (
-                <Tile key={item.id} data={item} type={type} setModalData={setModalData} />
+                <Tile key={item.id} data={item} setModalData={setModalData} />
             ))}
-
-            <InfoModal data={modalData} />
         </div>
     );
 };

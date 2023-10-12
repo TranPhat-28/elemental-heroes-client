@@ -22,13 +22,15 @@ const InfoModal = ({ data }) => {
                         <tbody>
                             <tr className="hover">
                                 <th>Type</th>
-                                <td>Skill</td>
+                                <td>{data?.damage ? "Skill" : "Weapon"}</td>
                             </tr>
 
-                            <tr className="hover">
-                                <th>Damage</th>
-                                <td>{data?.damage}</td>
-                            </tr>
+                            {data?.damage && (
+                                <tr className="hover">
+                                    <th>Damage</th>
+                                    <td>{data.damage}</td>
+                                </tr>
+                            )}
 
                             <tr className="hover">
                                 <th>{data?.element}</th>
@@ -40,27 +42,31 @@ const InfoModal = ({ data }) => {
                                 </td>
                             </tr>
 
-                            <tr className="hover">
-                                <th>{data?.attackType}</th>
-                                <td>
-                                    {data?.attackType == "Melee" ? (
-                                        <PiArrowsInLineVerticalBold className="h-8 w-8" />
-                                    ) : (
-                                        <PiArrowsOutLineVerticalBold className="h-8 w-8" />
-                                    )}
-                                </td>
-                            </tr>
+                            {data?.attackType && (
+                                <tr className="hover">
+                                    <th>{data.attackType}</th>
+                                    <td>
+                                        {data.attackType == "Melee" ? (
+                                            <PiArrowsInLineVerticalBold className="h-8 w-8" />
+                                        ) : (
+                                            <PiArrowsOutLineVerticalBold className="h-8 w-8" />
+                                        )}
+                                    </td>
+                                </tr>
+                            )}
 
-                            <tr className="hover">
-                                <th>{data?.damageType}</th>
-                                <td>
-                                    {data?.damageType == "Physical" ? (
-                                        <FaHammer className="h-8 w-8" />
-                                    ) : (
-                                        <FaReact className="h-8 w-8" />
-                                    )}
-                                </td>
-                            </tr>
+                            {data?.damageType && (
+                                <tr className="hover">
+                                    <th>{data.damageType}</th>
+                                    <td>
+                                        {data.damageType == "Physical" ? (
+                                            <FaHammer className="h-8 w-8" />
+                                        ) : (
+                                            <FaReact className="h-8 w-8" />
+                                        )}
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
