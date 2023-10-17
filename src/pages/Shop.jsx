@@ -46,7 +46,9 @@ const Shop = () => {
                     console.log(error);
                 })
                 .finally(() => {
-                    type === "weapon" ? setWeaponChestLoading(false) : setSkillChestLoading(false);
+                    type === "weapon"
+                        ? setWeaponChestLoading(false)
+                        : setSkillChestLoading(false);
                 });
         }
     };
@@ -110,12 +112,9 @@ const Shop = () => {
                 </button>
             </div>
 
-            <div className="bg-base-200 p-4 flex gap-1 absolute top-0 right-0">
-                <RiMoneyDollarCircleLine
-                    size={"2em"}
-                    className="text-orange-400"
-                />
-                <p className="text-xl font-bold">5000</p>
+            <div className="bg-base-200 p-2 sm:p-4 flex gap-1 absolute top-0 right-0">
+                <RiMoneyDollarCircleLine className="text-orange-400 text-[1.5em] sm:text-[2em]" />
+                <p className="text-md sm:text-xl font-bold text-base">5000</p>
             </div>
 
             <GetItemFromChestModal data={modalData} />
