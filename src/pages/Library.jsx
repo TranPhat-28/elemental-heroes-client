@@ -66,13 +66,25 @@ const Library = () => {
                 <div className="w-full max-w-[380px] sm:max-w-[440px] md:max-w-[360px] lg:max-w-[400px] xl:max-w-[500px]">
                     <h1 className="font-bold my-2">Weapons</h1>
                     {weaponLoading && <BeatLoader />}
-                    {weaponList && <LibraryList data={weaponList} setModalData={setModalData} />}
+                    {weaponList && (
+                        <LibraryList
+                            data={weaponList.weapons}
+                            totalCount={weaponList.totalWeaponCount}
+                            setModalData={setModalData}
+                        />
+                    )}
                 </div>
 
                 <div className="w-full max-w-[380px] sm:max-w-[440px] md:max-w-[360px] lg:max-w-[400px] xl:max-w-[500px]">
                     <h1 className="font-bold my-2">Skills</h1>
                     {skillLoading && <BeatLoader />}
-                    {skillList && <LibraryList data={skillList} setModalData={setModalData} />}
+                    {skillList && (
+                        <LibraryList
+                            data={skillList.skills}
+                            totalCount={skillList.totalSkillCount}
+                            setModalData={setModalData}
+                        />
+                    )}
                 </div>
             </div>
 

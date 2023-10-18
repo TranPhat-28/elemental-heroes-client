@@ -2,20 +2,25 @@ const Tile = ({ data, setModalData }) => {
     const ringColor =
         data.element == "Fire"
             ? "ring-fire"
-            : data.element == "Water"
+            : data.element === "Water"
             ? "ring-water"
-            : data.element == "Wind"
+            : data.element === "Wind"
             ? "ring-wind"
-            : data.element == "Earth"
+            : data.element === "Earth"
             ? "ring-earth"
-            : "ring-electric";
+            : data.element === "Electric"
+            ? "ring-electric"
+            : "ring-black";
 
     return (
         <div
             className="avatar py-3 justify-self-center hover:opacity-70 cursor-pointer duration-100"
             onClick={() => {
-                setModalData(data);
-                document.getElementById("info_modal").showModal();
+                // Only show the modal if setModalData is passed (which means this cell has data)
+                if (setModalData !== null) {
+                    setModalData(data);
+                    document.getElementById("info_modal").showModal();
+                }
             }}
         >
             <div
