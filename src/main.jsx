@@ -13,8 +13,8 @@ import { ToastContainer } from "react-toastify";
 import { MoonLoader } from "react-spinners";
 import LoadingModal from "./components/LoadingModal.jsx";
 
-//axios.defaults.baseURL = "https://elemental-heroes-server.onrender.com";
-axios.defaults.baseURL = "http://localhost:5054";
+axios.defaults.baseURL = "https://elemental-heroes-server.onrender.com";
+//axios.defaults.baseURL = "http://localhost:5054";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
