@@ -5,10 +5,12 @@ import {
     ObjectIsEmpty,
 } from "../helpers/Helpers";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { setHeroData } from "../redux/features/hero/heroSlice";
+import { allowFeaturePagesAccess, denyCreatePageAccess } from "../redux/features/routing/routingSlice";
 
 const Create = () => {
 
@@ -37,6 +39,7 @@ const Create = () => {
 
     // Redux
     const user = useSelector((state) => state.userAuth.user);
+    const dispatch = useDispatch();
 
     // Submit form
     const onSubmit = (data) => {
@@ -47,9 +50,25 @@ const Create = () => {
             .post("/api/Hero", data, {
                 headers: { Authorization: `Bearer ${user.token}` },
             })
+            // Successfully created a hero
             .then(function (response) {
+                // Show the message
                 toast.success(response.data.message);
                 setIsLoading(false);
+
+                // Set the heroData
+                dispatch(
+                    setHeroData({
+                        status: true,
+                        data: response.data.data,
+                    })
+                );
+
+                // Allow FeaturePages but not CreatePage
+                dispatch(allowFeaturePagesAccess());
+                dispatch(denyCreatePageAccess());
+
+                // Go back to home page
                 navigate("/");
             })
             .catch(function (error) {

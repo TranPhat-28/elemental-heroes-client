@@ -1,15 +1,18 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     RiMoneyDollarCircleLine,
     RiMoneyDollarCircleFill,
 } from "react-icons/ri";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import GetItemFromChestModal from "../components/GetItemFromChestModal";
+import { addBalance } from "../redux/features/userData/userDataSlice";
+import { toast } from "react-toastify";
+import useLogout from "../hooks/Users";
 
 const Shop = () => {
-    // Redux
-    const user = useSelector((state) => state.userAuth.user);
+    // Logout
+    const logout = useLogout();
 
     // Loading button
     const [weaponChestLoading, setWeaponChestLoading] = useState(false);
@@ -17,6 +20,45 @@ const Shop = () => {
 
     // Data for the Modal
     const [modalData, setModalData] = useState(null);
+
+    // Redux
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.userAuth.user);
+    const balance = useSelector((state) => state.userData.balance);
+
+    // Load data
+    useEffect(() => {
+        // Only load if no data is presented
+        if (!balance) {
+            // Show the loading modal
+            document.getElementById("loading_modal").showModal();
+
+            // Fetch balance
+            axios.get("/api/OpenChest/GetBalance", {
+                headers: { Authorization: `Bearer ${user.token}` },
+            })
+                .then((response) => {
+                    // Set Balance data
+                    dispatch(addBalance(response.data.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    if (error.response.status == 401) {
+                        toast.error("Cannot authenticate, please login again");
+                        logout();
+
+                        console.log(error.response);
+                    } else {
+                        toast.error("Something went wrong");
+                        console.log(error);
+                    }
+                })
+                .finally(() => {
+                    // Close the loading modal
+                    document.getElementById("loading_modal").close();
+                });
+        }
+    }, []);
 
     // Open Weapon Chest
     const openChest = (type) => {
@@ -112,9 +154,10 @@ const Shop = () => {
                 </button>
             </div>
 
+            {/* Your balance is here lol */}
             <div className="bg-base-200 p-2 sm:p-4 flex gap-1 absolute top-0 right-0">
                 <RiMoneyDollarCircleLine className="text-orange-400 text-[1.5em] sm:text-[2em]" />
-                <p className="text-md sm:text-xl font-bold text-base">5000</p>
+                <p className="text-md sm:text-xl font-bold text-base">{balance}</p>
             </div>
 
             <GetItemFromChestModal data={modalData} />
