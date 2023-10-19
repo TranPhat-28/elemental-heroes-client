@@ -6,7 +6,11 @@ import {
 } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import GetItemFromChestModal from "../components/GetItemFromChestModal";
-import { addBalance } from "../redux/features/userData/userDataSlice";
+import {
+    addBalance,
+    removeOwnedSkills,
+    removeOwnedWeapons,
+} from "../redux/features/userData/userDataSlice";
 import { toast } from "react-toastify";
 import useLogout from "../hooks/Users";
 
@@ -29,14 +33,15 @@ const Shop = () => {
     // Load data
     useEffect(() => {
         // Only load if no data is presented
-        if (!balance) {
+        if (balance === null) {
             // Show the loading modal
             document.getElementById("loading_modal").showModal();
 
             // Fetch balance
-            axios.get("/api/OpenChest/GetBalance", {
-                headers: { Authorization: `Bearer ${user.token}` },
-            })
+            axios
+                .get("/api/OpenChest/GetBalance", {
+                    headers: { Authorization: `Bearer ${user.token}` },
+                })
                 .then((response) => {
                     // Set Balance data
                     dispatch(addBalance(response.data.data));
@@ -60,7 +65,7 @@ const Shop = () => {
         }
     }, []);
 
-    // Open Weapon Chest
+    // Open Chest
     const openChest = (type) => {
         if (type !== "weapon" && type !== "skill") {
             return;
@@ -81,11 +86,22 @@ const Shop = () => {
                     headers: { Authorization: `Bearer ${user.token}` },
                 })
                 .then(function (response) {
-                    setModalData(response.data.data);
+                    dispatch(addBalance(response.data.data.remainingBalance));
+                    if (type === "skill") {
+                        setModalData(response.data.data.obtainedSkills);
+                    } else {
+                        setModalData(response.data.data.obtainedWeapons);
+                    }
+
                     document.getElementById("reward_modal").showModal();
+
+                    // Remove the Skills and Weapons data in Redux so that it will refetch
+                    dispatch(removeOwnedSkills());
+                    dispatch(removeOwnedWeapons());
                 })
                 .catch(function (error) {
                     console.log(error);
+                    toast.error(error.response.data.message);
                 })
                 .finally(() => {
                     type === "weapon"
@@ -157,7 +173,9 @@ const Shop = () => {
             {/* Your balance is here lol */}
             <div className="bg-base-200 p-2 sm:p-4 flex gap-1 absolute top-0 right-0">
                 <RiMoneyDollarCircleLine className="text-orange-400 text-[1.5em] sm:text-[2em]" />
-                <p className="text-md sm:text-xl font-bold text-base">{balance}</p>
+                <p className="text-md sm:text-xl font-bold text-base">
+                    {balance}
+                </p>
             </div>
 
             <GetItemFromChestModal data={modalData} />

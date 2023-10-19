@@ -3,6 +3,7 @@ import { removeUserAuth } from "../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
 import { denyCreatePageAccess, denyFeaturePagesAccess } from "../redux/features/routing/routingSlice";
 import { removeHeroData } from "../redux/features/hero/heroSlice";
+import { removeAllUserData } from "../redux/features/userData/userDataSlice";
 
 const useLogout = () => {
 
@@ -15,6 +16,9 @@ const useLogout = () => {
 
         // Remove Hero data
         dispatch(removeHeroData());
+
+        // Remove User data
+        dispatch(removeAllUserData());
 
         // Remove User
         dispatch(removeUserAuth());
