@@ -1,4 +1,47 @@
+import axios from "axios";
+import { toast } from "react-toastify";
+import { setHeroData } from "../redux/features/hero/heroSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { ObjectIsEmpty } from "../helpers/Helpers";
+
 const FormationTile = ({ data, type }) => {
+    // Redux
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.userAuth.user);
+
+    // Remove equipment
+    const removeEquip = () => {
+        // If there is an equipment in the slot
+        if (!ObjectIsEmpty(data)) {
+            const url =
+                type === "weapon"
+                    ? "/api/Hero/RemoveWeapon"
+                    : "For_Unequipping_Skills";
+            // Unequip
+            axios
+                .put(url, null, {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                    },
+                })
+                .then(function (response) {
+                    toast.success(response.data.message);
+
+                    // Set new weapon to the Redux hero data
+                    dispatch(
+                        setHeroData({
+                            status: true,
+                            data: response.data.data,
+                        })
+                    );
+                })
+                .catch(function (error) {
+                    toast.error(error.message);
+                    console.log(error);
+                });
+        }
+    };
+
     // Ring color, black if not equipped
     const ringColor =
         data.element == "Fire"
@@ -23,7 +66,10 @@ const FormationTile = ({ data, type }) => {
         : "";
 
     return (
-        <div className="avatar py-3 justify-self-center hover:opacity-70 cursor-pointer duration-100">
+        <div
+            className="avatar py-3 justify-self-center hover:opacity-70 cursor-pointer duration-100"
+            onClick={removeEquip}
+        >
             <div
                 className={`${
                     type === "weapon"

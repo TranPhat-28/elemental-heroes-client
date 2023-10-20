@@ -55,7 +55,7 @@ const Formation = () => {
                         />
                         {/* Weapon and skills container */}
                         <div className="flex gap-5 sm:gap-8 justify-center items-center">
-                            <FormationTile data={{}} type={"weapon"}/>
+                            <FormationTile data={hero.weapon ? hero.weapon : {}} type={"weapon"}/>
                             <FormationTile data={{}} type={"skill"}/>
                             <FormationTile data={{}} type={"skill"}/>
                             <FormationTile data={{}} type={"skill"}/>

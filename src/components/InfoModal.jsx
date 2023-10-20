@@ -4,8 +4,64 @@ import {
     PiArrowsOutLineVerticalBold,
 } from "react-icons/pi";
 import { GetElementImgPath } from "../helpers/Helpers";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import { setHeroData } from "../redux/features/hero/heroSlice";
 
 const InfoModal = ({ data }) => {
+    // Redux
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.userAuth.user);
+
+    // Button loading
+    const [isLoading, setLoading] = useState(false);
+
+    // Handle equip
+    const handleEquip = () => {
+        const type = data?.damage ? "Skill" : "Weapon";
+
+        const url =
+            type === "Weapon"
+                ? "/api/Hero/EquipWeapon"
+                : "For_Equipping_Skills";
+
+        // Set Loading
+        setLoading(true);
+
+        // Equip weapon
+        axios
+            .put(
+                url,
+                {
+                    weaponId: data.id,
+                },
+                {
+                    headers: { Authorization: `Bearer ${user.token}` },
+                }
+            )
+            .then(function (response) {
+                toast.success(response.data.message);
+
+                // Set new weapon to the Redux hero data
+                dispatch(
+                    setHeroData({
+                        status: true,
+                        data: response.data.data,
+                    })
+                );
+            })
+            .catch(function (error) {
+                toast.error(error.message);
+                console.log(error);
+            })
+            .finally(() => {
+                setLoading(false);
+                document.getElementById("info_modal").close();
+            });
+    };
+
     return (
         <dialog id="info_modal" className="modal">
             <div className="modal-box">
@@ -72,6 +128,17 @@ const InfoModal = ({ data }) => {
                 </div>
 
                 <div className="modal-action">
+                    <button
+                        className={`btn ${
+                            isLoading ? "btn-disabled" : "btn-primary"
+                        }`}
+                        onClick={handleEquip}
+                    >
+                        {isLoading && (
+                            <span className="loading loading-spinner"></span>
+                        )}
+                        Equip
+                    </button>
                     <form method="dialog">
                         <button className="btn">Close</button>
                     </form>
