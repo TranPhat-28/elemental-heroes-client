@@ -71,6 +71,30 @@ const Library = () => {
             <div className="w-full h-full flex flex-col md:flex-row md:justify-around items-center md:items-start">
                 <div className="w-full max-w-[380px] sm:max-w-[440px] md:max-w-[360px] lg:max-w-[400px] xl:max-w-[500px]">
                     <h1 className="font-bold my-2">Weapons</h1>
+                    <div className="w-full p-2">
+                        <div className="alert flex p-3 md:h-20">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                className="stroke-info shrink-0 w-6 h-6"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                ></path>
+                            </svg>
+                            <span className="text-left text-[0.8rem] italic">
+                                Weapons with matching{" "}
+                                <span className="font-bold">ELEMENT</span> give
+                                a bonus of{" "}
+                                <span className="font-bold">40 HP</span> and{" "}
+                                <span className="font-bold">20 DEFENSE.</span>
+                            </span>
+                        </div>
+                    </div>
                     {weaponList && (
                         <LibraryList
                             data={weaponList.weapons}
@@ -82,6 +106,36 @@ const Library = () => {
 
                 <div className="w-full max-w-[380px] sm:max-w-[440px] md:max-w-[360px] lg:max-w-[400px] xl:max-w-[500px]">
                     <h1 className="font-bold my-2">Skills</h1>
+                    <div className="w-full p-2">
+                        <div className="alert flex p-3 md:h-20">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                className="stroke-info shrink-0 w-6 h-6"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                ></path>
+                            </svg>
+                            <span className="text-left text-[0.8rem] italic">
+                                Skills with matching{" "}
+                                <span className="font-bold">ELEMENT</span> give
+                                a bonus of{" "}
+                                <span className="font-bold">10 ATTACK</span>.
+                                Matching{" "}
+                                <span className="font-bold">ATTACK TYPE</span>{" "}
+                                and{" "}
+                                <span className="font-bold">DAMAGE TYPE</span>{" "}
+                                will give another{" "}
+                                <span className="font-bold">5 ATTACK</span>bonus
+                                for each match.
+                            </span>
+                        </div>
+                    </div>
                     {skillList && (
                         <LibraryList
                             data={skillList.skills}

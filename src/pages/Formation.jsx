@@ -65,7 +65,8 @@ const Formation = () => {
                         <div className="h-full lg:h-3/4 w-full grid gap-2 grid-cols-2 md:grid-cols-1">
                             <Stat
                                 icon={<GiMedicalPack className="text-4xl" />}
-                                value={`${hero.hp} + 0`}
+                                value={hero.hp}
+                                bonus={hero.bonusHp}
                             />
                             <Stat
                                 icon={
@@ -79,7 +80,8 @@ const Formation = () => {
                             <Stat
                                 position={"md:row-start-2"}
                                 icon={<PiSwordBold className="text-4xl" />}
-                                value={`${hero.attack} + 0`}
+                                value={hero.attack}
+                                bonus={hero.bonusAttack}
                             />
                             <Stat
                                 icon={
@@ -94,7 +96,8 @@ const Formation = () => {
                             <Stat
                                 position={"md:row-start-3"}
                                 icon={<FaShieldHalved className="text-4xl" />}
-                                value={`${hero.defense} + 0`}
+                                value={hero.defense}
+                                bonus={hero.bonusDefense}
                             />
                             <Stat
                                 icon={

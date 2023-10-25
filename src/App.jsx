@@ -15,6 +15,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ResetPasswordPage from "./pages/ResetPassword";
 import Create from "./pages/Create";
 import NotFound from "./pages/NotFound";
+import Matching from "./pages/Matching";
 
 function App() {
     // Read user from LocalStorage
@@ -43,6 +44,7 @@ function App() {
                         <Route path="/formation" element={<Formation />} />
                         <Route path="/library" element={<Library />} />
                         <Route path="/shop" element={<Shop />} />
+                        <Route path="/matching" element={<Matching />} />
                     </>
                 )}
                 <Route path="/settings" element={<Settings />} />

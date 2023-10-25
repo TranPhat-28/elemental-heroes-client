@@ -11,8 +11,12 @@ import {
 } from "../redux/features/routing/routingSlice";
 import TutorialModal from "../components/TutorialModal";
 import { setHeroData } from "../redux/features/hero/heroSlice";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+    // Navigate
+    const navigate = useNavigate();
+
     // The Logout hook
     const { logout } = useLogout();
 
@@ -92,14 +96,15 @@ const Home = () => {
 
     return (
         <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-5 sm:gap-10">
-            <div className="flex flex-col items-center cursor-pointer rounded-3xl p-4 md:p-6 bg-base-200 hover:shadow-2xl duration-75">
+            <div
+                className="flex flex-col items-center cursor-pointer rounded-3xl p-4 md:p-6 bg-base-200 hover:shadow-2xl duration-75"
+                onClick={() => {navigate('/matching')}}
+            >
                 <img
                     src={"assets/icons/BattleA.png"}
                     className="w-52 h-52 lg:w-80 lg:h-80"
                 />
-                <p className="font-bold text-3xl md:text-4xl">
-                    AI singleplayer
-                </p>
+                <p className="font-bold text-3xl md:text-4xl">Singleplayer</p>
             </div>
 
             <div className="flex flex-col items-center cursor-pointer rounded-3xl p-4 md:p-6 bg-base-200 hover:shadow-2xl duration-75">
