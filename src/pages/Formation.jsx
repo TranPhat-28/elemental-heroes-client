@@ -31,20 +31,33 @@ const Formation = () => {
             {hero && (
                 <div className="w-full max-w-lg h-full md:max-w-4xl flex flex-col md:flex-row p-2">
                     <div className="h-2/3 md:h-full w-full md:w-2/3 flex flex-col justify-center items-center">
-                        <div className="w-full flex justify-center">
-                            <p className="border w-fit text-center text-4xl font-bold px-5">
-                                {hero.name}
-                            </p>
-                            <button className="btn btn-outline btn-primary">
-                                <AiOutlineEdit
-                                    size={"2rem"}
-                                    onClick={() =>
-                                        document
-                                            .getElementById("change_name_modal")
-                                            .showModal()
-                                    }
-                                />
-                            </button>
+                        <div className="w-full flex flex-col justify-center">
+                            <div className="w-full flex justify-center">
+                                <p className="border w-fit text-center text-4xl font-bold px-5">
+                                    {hero.name}
+                                </p>
+                                <button className="btn btn-outline btn-primary">
+                                    <AiOutlineEdit
+                                        size={"2rem"}
+                                        onClick={() =>
+                                            document
+                                                .getElementById(
+                                                    "change_name_modal"
+                                                )
+                                                .showModal()
+                                        }
+                                    />
+                                </button>
+                            </div>
+                            <span className="italic font-semibold text-center">
+                                CP:{" "}
+                                {hero.hp +
+                                    hero.attack +
+                                    hero.defense +
+                                    hero.bonusHp +
+                                    hero.bonusAttack +
+                                    hero.bonusDefense}
+                            </span>
                         </div>
 
                         <img
@@ -55,10 +68,13 @@ const Formation = () => {
                         />
                         {/* Weapon and skills container */}
                         <div className="flex gap-5 sm:gap-8 justify-center items-center">
-                            <FormationTile data={hero.weapon ? hero.weapon : {}} type={"weapon"}/>
-                            <FormationTile data={{}} type={"skill"}/>
-                            <FormationTile data={{}} type={"skill"}/>
-                            <FormationTile data={{}} type={"skill"}/>
+                            <FormationTile
+                                data={hero.weapon ? hero.weapon : {}}
+                                type={"weapon"}
+                            />
+                            <FormationTile data={{}} type={"skill"} />
+                            <FormationTile data={{}} type={"skill"} />
+                            <FormationTile data={{}} type={"skill"} />
                         </div>
                     </div>
                     <div className="h-1/3 md:h-full lg:flex lg:items-center w-full md:w-1/3 p-2">

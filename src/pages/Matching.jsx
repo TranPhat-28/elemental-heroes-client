@@ -19,13 +19,18 @@ const Matching = () => {
 
     // Fetching bot data
     useEffect(() => {
-        console.log("Fetch")
         axios
             .get("/api/Game/GetBotHeroData", {
                 headers: { Authorization: `Bearer ${user.token}` },
             })
             .then(function (response) {
                 setBotData(response.data.data);
+                return axios.get("/api/Game/GetSingleplayerMatchResult", {
+                    headers: { Authorization: `Bearer ${user.token}` },
+                });
+            })
+            .then(function (response) {
+                console.log(response.data.data);
             })
             .catch(function (error) {
                 navigate("/");
