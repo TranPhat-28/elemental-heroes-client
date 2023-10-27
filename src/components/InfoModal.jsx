@@ -181,7 +181,7 @@ const InfoModal = ({ data }) => {
                                 <span className="loading loading-spinner"></span>
                             )}
                             Equip
-                        </button> : <button className="btn btn-info">Equipped</button> : 
+                        </button> : <button className="btn btn-info btn-outline">Equipped</button> : 
                         data?.id !== heroWeapon ? <button
                             className={`btn ${
                                 isLoading ? "btn-disabled" : "btn-primary"
@@ -192,19 +192,7 @@ const InfoModal = ({ data }) => {
                                 <span className="loading loading-spinner"></span>
                             )}
                             Equip
-                        </button> : <button className="btn btn-info">Equipped</button>
-                    
-                        // <button
-                        //     className={`btn ${
-                        //         isLoading ? "btn-disabled" : "btn-primary"
-                        //     }`}
-                        //     onClick={handleEquip}
-                        // >
-                        //     {isLoading && (
-                        //         <span className="loading loading-spinner"></span>
-                        //     )}
-                        //     Equip
-                        // </button>
+                        </button> : <button className="btn btn-info btn-outline">Equipped</button>
                     }
                     <form method="dialog">
                         <button className="btn">Close</button>
