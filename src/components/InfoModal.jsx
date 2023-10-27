@@ -14,6 +14,9 @@ const InfoModal = ({ data }) => {
     // Redux
     const dispatch = useDispatch();
     const user = useSelector((state) => state.userAuth.user);
+    const hero = useSelector((state) => state.heroData.hero.data);
+    const heroWeapon = hero.weapon?.id;
+    const heroSkills = [hero.skillA?.id, hero.skillB?.id, hero.skillC?.id];
 
     // Slot option to handle equipping skill
     const [slot, setSlot] = useState(1);
@@ -168,17 +171,41 @@ const InfoModal = ({ data }) => {
                 )}
 
                 <div className="modal-action">
-                    <button
-                        className={`btn ${
-                            isLoading ? "btn-disabled" : "btn-primary"
-                        }`}
-                        onClick={handleEquip}
-                    >
-                        {isLoading && (
-                            <span className="loading loading-spinner"></span>
-                        )}
-                        Equip
-                    </button>
+                    {data?.damage ? !heroSkills.includes(data?.id) ? <button
+                            className={`btn ${
+                                isLoading ? "btn-disabled" : "btn-primary"
+                            }`}
+                            onClick={handleEquip}
+                        >
+                            {isLoading && (
+                                <span className="loading loading-spinner"></span>
+                            )}
+                            Equip
+                        </button> : <button className="btn btn-info">Equipped</button> : 
+                        data?.id !== heroWeapon ? <button
+                            className={`btn ${
+                                isLoading ? "btn-disabled" : "btn-primary"
+                            }`}
+                            onClick={handleEquip}
+                        >
+                            {isLoading && (
+                                <span className="loading loading-spinner"></span>
+                            )}
+                            Equip
+                        </button> : <button className="btn btn-info">Equipped</button>
+                    
+                        // <button
+                        //     className={`btn ${
+                        //         isLoading ? "btn-disabled" : "btn-primary"
+                        //     }`}
+                        //     onClick={handleEquip}
+                        // >
+                        //     {isLoading && (
+                        //         <span className="loading loading-spinner"></span>
+                        //     )}
+                        //     Equip
+                        // </button>
+                    }
                     <form method="dialog">
                         <button className="btn">Close</button>
                     </form>

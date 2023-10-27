@@ -1,4 +1,11 @@
+import { useSelector } from "react-redux";
+import { BsCheck } from "react-icons/bs";
+
 const Tile = ({ data, setModalData }) => {
+    const hero = useSelector((state) => state.heroData.hero.data);
+    const heroWeapon = hero.weapon?.id;
+    const heroSkills = [hero.skillA?.id, hero.skillB?.id, hero.skillC?.id];
+
     const ringColor =
         data.element == "Fire"
             ? "ring-fire"
@@ -24,8 +31,22 @@ const Tile = ({ data, setModalData }) => {
             }}
         >
             <div
-                className={`rounded-lg w-16 h-16 sm:w-20 sm:h-20 ring ${ringColor} ring ring-offset-base-100 ring-offset-2`}
+                className={`indicator rounded-lg w-16 h-16 sm:w-20 sm:h-20 ring ${ringColor} ring ring-offset-base-100 ring-offset-2`}
             >
+                {data.id !== undefined &&
+                    data.damage === undefined &&
+                    data.id === heroWeapon && (
+                        <span className="absolute top-1 left-1 bg-base-100 rounded-full">
+                            <BsCheck color="green" size={"1.5rem"} />
+                        </span>
+                    )}
+                {data.id !== undefined &&
+                    data.damage !== undefined &&
+                    heroSkills.includes(data.id) && (
+                        <span className="absolute top-1 left-1 bg-base-100 rounded-full">
+                            <BsCheck color="green" size={"1.5rem"} />
+                        </span>
+                    )}
                 <img src={data.iconUrl} />
             </div>
         </div>
