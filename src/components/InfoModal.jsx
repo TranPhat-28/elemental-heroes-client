@@ -15,32 +15,39 @@ const InfoModal = ({ data }) => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.userAuth.user);
 
+    // Slot option to handle equipping skill
+    const [slot, setSlot] = useState(1);
+
     // Button loading
     const [isLoading, setLoading] = useState(false);
 
     // Handle equip
     const handleEquip = () => {
-        const type = data?.damage ? "Skill" : "Weapon";
-
-        const url =
-            type === "Weapon"
-                ? "/api/Hero/EquipWeapon"
-                : "For_Equipping_Skills";
-
         // Set Loading
         setLoading(true);
 
-        // Equip weapon
-        axios
-            .put(
-                url,
-                {
-                    weaponId: data.id,
-                },
-                {
-                    headers: { Authorization: `Bearer ${user.token}` },
-                }
-            )
+        const type = data?.damage ? "Skill" : "Weapon";
+        const requestConfig = {};
+
+        // Conditionally setup the request
+        if (type === "Weapon") {
+            requestConfig.method = "put";
+            requestConfig.url = "/api/Hero/EquipWeapon";
+            requestConfig.data = { weaponId: data.id };
+            requestConfig.headers = {
+                Authorization: `Bearer ${user.token}`,
+            };
+        } else if (type === "Skill") {
+            requestConfig.method = "put";
+            requestConfig.url = "/api/Hero/EquipSkill";
+            requestConfig.data = { skillId: data.id, slot: slot };
+            requestConfig.headers = {
+                Authorization: `Bearer ${user.token}`,
+            };
+        }
+
+        // Perform the request
+        axios(requestConfig)
             .then(function (response) {
                 toast.success(response.data.message);
 
@@ -53,7 +60,11 @@ const InfoModal = ({ data }) => {
                 );
             })
             .catch(function (error) {
-                toast.error(error.message);
+                if (!error.response.data.isSuccess) {
+                    toast.error(error.response.data.message);
+                } else {
+                    toast.error(error.message);
+                }
                 console.log(error);
             })
             .finally(() => {
@@ -126,6 +137,35 @@ const InfoModal = ({ data }) => {
                         </tbody>
                     </table>
                 </div>
+
+                {data?.damage && (
+                    <div className="w-full flex flex-col items-center">
+                        <p className="my-4">Choose the skill slot to equip</p>
+                        <div className="w-full flex justify-center gap-2">
+                            <input
+                                type="radio"
+                                name="radio-2"
+                                className="radio radio-primary"
+                                checked={slot === 1}
+                                onChange={() => setSlot(1)}
+                            />
+                            <input
+                                type="radio"
+                                name="radio-2"
+                                className="radio radio-primary"
+                                checked={slot === 2}
+                                onChange={() => setSlot(2)}
+                            />
+                            <input
+                                type="radio"
+                                name="radio-2"
+                                className="radio radio-primary"
+                                checked={slot === 3}
+                                onChange={() => setSlot(3)}
+                            />
+                        </div>
+                    </div>
+                )}
 
                 <div className="modal-action">
                     <button

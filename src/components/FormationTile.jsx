@@ -4,7 +4,7 @@ import { setHeroData } from "../redux/features/hero/heroSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ObjectIsEmpty } from "../helpers/Helpers";
 
-const FormationTile = ({ data, type }) => {
+const FormationTile = ({ data, type, slot }) => {
     // Redux
     const dispatch = useDispatch();
     const user = useSelector((state) => state.userAuth.user);
@@ -13,17 +13,27 @@ const FormationTile = ({ data, type }) => {
     const removeEquip = () => {
         // If there is an equipment in the slot
         if (!ObjectIsEmpty(data)) {
-            const url =
-                type === "weapon"
-                    ? "/api/Hero/RemoveWeapon"
-                    : "For_Unequipping_Skills";
-            // Unequip
-            axios
-                .put(url, null, {
-                    headers: {
-                        Authorization: `Bearer ${user.token}`,
-                    },
-                })
+            const requestConfig = {};
+
+            // Conditionally setup the request
+            if (type === "weapon") {
+                requestConfig.method = "put";
+                requestConfig.url = "/api/Hero/RemoveWeapon";
+                requestConfig.data = null;
+                requestConfig.headers = {
+                    Authorization: `Bearer ${user.token}`,
+                };
+            } else if (type === "skill") {
+                requestConfig.method = "put";
+                requestConfig.url = "/api/Hero/RemoveSkill";
+                requestConfig.data = { slot: slot };
+                requestConfig.headers = {
+                    Authorization: `Bearer ${user.token}`,
+                };
+            }
+
+            // Then perform the request
+            axios(requestConfig)
                 .then(function (response) {
                     toast.success(response.data.message);
 

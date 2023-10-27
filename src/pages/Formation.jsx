@@ -72,9 +72,9 @@ const Formation = () => {
                                 data={hero.weapon ? hero.weapon : {}}
                                 type={"weapon"}
                             />
-                            <FormationTile data={{}} type={"skill"} />
-                            <FormationTile data={{}} type={"skill"} />
-                            <FormationTile data={{}} type={"skill"} />
+                            <FormationTile data={hero.skillA ? hero.skillA : {}} type={"skill"} slot={1} />
+                            <FormationTile data={hero.skillB ? hero.skillB : {}} type={"skill"} slot={2} />
+                            <FormationTile data={hero.skillC ? hero.skillC : {}} type={"skill"} slot={3} />
                         </div>
                     </div>
                     <div className="h-1/3 md:h-full lg:flex lg:items-center w-full md:w-1/3 p-2">
