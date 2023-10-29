@@ -25,9 +25,13 @@ const Matching = () => {
             })
             .then(function (response) {
                 setBotData(response.data.data);
-                return axios.get("/api/Game/GetSingleplayerMatchResult", {
-                    headers: { Authorization: `Bearer ${user.token}` },
-                });
+                return axios.post(
+                    "/api/Game/GetSingleplayerMatchResult",
+                    response.data.data,
+                    {
+                        headers: { Authorization: `Bearer ${user.token}` },
+                    }
+                );
             })
             .then(function (response) {
                 console.log(response.data.data);
@@ -47,6 +51,7 @@ const Matching = () => {
             {/* Enemy */}
             <MatchMakingHeroDisplay
                 flexDirection={"flex-col"}
+                imgDirection={"rotate-180"}
                 hero={botData}
                 isLoading={isLoading}
             />
@@ -55,6 +60,7 @@ const Matching = () => {
             <MatchMakingHeroDisplay
                 flexDirection={"flex-col-reverse lg:flex-col"}
                 hero={yourHero}
+                imgDirection={"lg:rotate-180"}
             />
 
             <img

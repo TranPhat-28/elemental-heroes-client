@@ -64,7 +64,7 @@ const Formation = () => {
                             src={GetHeroImgPath(
                                 GetHeroType(hero.attackType, hero.damageType)
                             )}
-                            className="h-52 w-52 md:w-72 md:h-72 lg:w-80 lg:h-80 self-center"
+                            className="h-52 w-52 md:w-72 md:h-72 lg:w-80 lg:h-80 self-center rotate-180"
                         />
                         {/* Weapon and skills container */}
                         <div className="flex gap-5 sm:gap-8 justify-center items-center">

@@ -1,7 +1,7 @@
 import { GetHeroImgPath, GetHeroType } from "../helpers/Helpers";
 import { PropagateLoader } from "react-spinners";
 
-const MatchMakingHeroDisplay = ({ flexDirection, hero, isLoading }) => {
+const MatchMakingHeroDisplay = ({ flexDirection, imgDirection, hero, isLoading }) => {
     return (
         <div
             className={`w-full lg:max-w-lg h-full bg-red-200 flex ${flexDirection} items-center justify-center`}
@@ -25,7 +25,7 @@ const MatchMakingHeroDisplay = ({ flexDirection, hero, isLoading }) => {
                         src={GetHeroImgPath(
                             GetHeroType(hero.attackType, hero.damageType)
                         )}
-                        className="h-52 w-52 lg:w-80 lg:h-80 self-center"
+                        className={`h-52 w-52 lg:w-80 lg:h-80 ${imgDirection} self-center`}
                     />
                 </>
             )}
