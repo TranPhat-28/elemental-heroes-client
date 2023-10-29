@@ -16,6 +16,7 @@ import ResetPasswordPage from "./pages/ResetPassword";
 import Create from "./pages/Create";
 import NotFound from "./pages/NotFound";
 import Matching from "./pages/Matching";
+import Gameplay from "./pages/Gameplay";
 
 function App() {
     // Read user from LocalStorage
@@ -59,6 +60,11 @@ function App() {
                         <Navigate to={"/login"} replace />
                     )
                 }
+            />
+
+            <Route
+                path="/gameplay"
+                element={user ? <Gameplay /> : <Navigate to={"/login"} replace />}
             />
 
             <Route

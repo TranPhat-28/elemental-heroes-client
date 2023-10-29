@@ -34,7 +34,14 @@ const Matching = () => {
                 );
             })
             .then(function (response) {
-                console.log(response.data.data);
+                setTimeout(() => {
+                    document.getElementById("game_start_modal").showModal();
+
+                    setTimeout(() => {
+                        document.getElementById("game_start_modal").close();
+                        navigate("/gameplay", { state: response.data.data });
+                    }, 1500);
+                }, 1000);
             })
             .catch(function (error) {
                 navigate("/");
