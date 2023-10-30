@@ -18,7 +18,7 @@ axios.defaults.baseURL = "https://elemental-heroes-server.onrender.com";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    // <React.StrictMode>
+    <React.StrictMode>
         <React.Suspense fallback={<MoonLoader />}>
             <Provider store={store}>
                 <BrowserRouter>
@@ -29,5 +29,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 </BrowserRouter>
             </Provider>
         </React.Suspense>
-    // </React.StrictMode>
+    </React.StrictMode>
 );
