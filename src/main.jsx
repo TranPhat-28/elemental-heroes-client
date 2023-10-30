@@ -15,7 +15,6 @@ import LoadingModal from "./components/LoadingModal.jsx";
 import GameStartModal from "./components/GameStartModal.jsx";
 
 axios.defaults.baseURL = "https://elemental-heroes-server.onrender.com";
-// axios.defaults.baseURL = "http://localhost:5054";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

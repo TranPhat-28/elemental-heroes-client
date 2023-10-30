@@ -4,7 +4,7 @@ import { PropagateLoader } from "react-spinners";
 const MatchMakingHeroDisplay = ({ flexDirection, imgDirection, hero, isLoading }) => {
     return (
         <div
-            className={`w-full lg:max-w-lg h-full bg-red-200 flex ${flexDirection} items-center justify-center`}
+            className={`w-full lg:max-w-lg h-full flex ${flexDirection} items-center justify-center`}
         >
             {hero && (
                 <>

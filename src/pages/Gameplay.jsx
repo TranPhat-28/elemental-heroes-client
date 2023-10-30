@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { GetHeroImgPath, GetHeroType } from "../helpers/Helpers";
+import GameResultModal from "../components/GameResultModal";
 
 const Gameplay = () => {
     // Game data
@@ -8,8 +9,6 @@ const Gameplay = () => {
 
     // Navigate
     const navigate = useNavigate();
-
-    // console.log(state);
 
     // Display HP:
     const [playerHp, setPlayerHp] = useState(state?.gameResult[0].playerInitHp);
@@ -30,7 +29,7 @@ const Gameplay = () => {
     async function GameAnimation() {
         for (const turn of state.gameResult) {
             // Initial waiting
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
 
             // Show player attack animation
             setPlayerAttack(true);
@@ -50,7 +49,7 @@ const Gameplay = () => {
             setPlayerDmgDealt(null);
 
             // Show bot attack animation
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             setBotAttack(true);
             // Reset the gif animation
             setImgSrc("assets/animations/Slash.gif");
@@ -67,6 +66,9 @@ const Gameplay = () => {
             setPlayerHp(turn.playerRemainingHp);
             setBotDmgDealt(null);
         }
+
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        document.getElementById("game_result_modal").showModal();
     }
 
     useEffect(() => {
@@ -84,7 +86,7 @@ const Gameplay = () => {
             {state && (
                 <div
                     className={
-                        "w-full lg:max-w-lg h-full bg-red-200 flex flex-col items-center justify-center"
+                        "w-full lg:max-w-lg h-full flex flex-col items-center justify-center"
                     }
                 >
                     <progress
@@ -93,7 +95,7 @@ const Gameplay = () => {
                         max={state.gameResult[0].botInitHp}
                     ></progress>
 
-                    <div className="h-52 w-52 lg:w-80 lg:h-80 relative rotate-180 flex">
+                    <div className="h-52 w-52 lg:w-80 lg:h-80 relative rotate-180 lg:rotate-0 flex">
                         <img
                             src={GetHeroImgPath(
                                 GetHeroType(
@@ -115,7 +117,7 @@ const Gameplay = () => {
                             }`}
                         />
 
-                        <div className="absolute text-center text-6xl bottom-0 left-1/2 -translate-x-1/2 rotate-180 font-bungee-spice">
+                        <div className="absolute text-center text-6xl bottom-0 lg:top-0 left-1/2 -translate-x-1/2 rotate-180 lg:rotate-0 font-bungee-spice">
                             {playerDmgDealt}
                         </div>
                     </div>
@@ -126,7 +128,7 @@ const Gameplay = () => {
             {state && (
                 <div
                     className={
-                        "w-full lg:max-w-lg h-full bg-red-200 flex flex-col-reverse items-center justify-center"
+                        "w-full lg:max-w-lg h-full flex flex-col-reverse lg:flex-col items-center justify-center"
                     }
                 >
                     <progress
@@ -157,12 +159,18 @@ const Gameplay = () => {
                             }`}
                         />
 
-                        <div className="absolute text-center text-6xl bottom-0 left-1/2 -translate-x-1/2 font-bungee-spice">
+                        <div className="absolute text-center text-6xl bottom-0 lg:top-0 left-1/2 -translate-x-1/2 font-bungee-spice">
                             {botDmgDealt}
                         </div>
                     </div>
                 </div>
             )}
+
+            <GameResultModal
+                isVictory={state?.gameResult.playerVictory}
+                turnCount={state?.gameResult.length}
+                reward={state?.reward}
+            />
         </div>
     );
 };
