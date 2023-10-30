@@ -20,7 +20,7 @@ const GameResultModal = ({ isVictory, turnCount, reward }) => {
             <div className="modal-box flex flex-col items-center">
                 <img
                     src={
-                        isVictory
+                        (isVictory === true)
                             ? "assets/icons/Victory.png"
                             : "assets/icons/Defeat.png"
                     }

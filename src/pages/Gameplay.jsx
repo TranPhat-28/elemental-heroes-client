@@ -167,7 +167,7 @@ const Gameplay = () => {
             )}
 
             <GameResultModal
-                isVictory={state?.gameResult.playerVictory}
+                isVictory={state?.playerVictory}
                 turnCount={state?.gameResult.length}
                 reward={state?.reward}
             />
